@@ -74,7 +74,7 @@ echo " done"
 cd $BUILD_DIR
 
 # copy target folder (for GWT cache)
-mkdir -p $BUILD_DIR/target
+rm -rf $BUILD_DIR/target
 if [ -d $CACHE_DIR/target ]; then
 	cp -r $CACHE_DIR/target $BUILD_DIR/target
 fi
