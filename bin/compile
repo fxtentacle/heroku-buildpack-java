@@ -73,6 +73,10 @@ echo " done"
 # change to build dir to run maven
 cd $BUILD_DIR
 
+# copy target folder (for GWT cache)
+mkdir -p $BUILD_DIR/target
+cp -r $CACHE_DIR/target $BUILD_DIR/target
+
 export MAVEN_OPTS="-Xmx1024m"
 
 # build app
@@ -85,6 +89,10 @@ if [ "${PIPESTATUS[*]}" != "0 0" ]; then
   echo " !     Failed to build app with Maven"
   exit 1
 fi
+
+# copy target to cache
+rm -rf $CACHE_DIR/target
+cp -r $BUILD_DIR/target $CACHE_DIR/target
 
 # finalize cache
 if [ "false" == $KEEP_M2_CACHE ]; then
